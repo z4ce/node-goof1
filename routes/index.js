@@ -306,6 +306,15 @@ exports.about_new = function (req, res, next) {
     });
 };
 
+// Simple SQL Injection vulnerability
+exports.search = function (req, res, next) {
+  var searchTerm = req.query.q;
+  var query = "SELECT * FROM todos WHERE content LIKE '%" + searchTerm + "%'";
+  
+  console.log('Executing query: ' + query);
+  res.send('Search results');
+};
+
 // Prototype Pollution
 
 ///////////////////////////////////////////////////////////////////////////////
